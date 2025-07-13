@@ -21,8 +21,6 @@
     </div>
   </div>
 
-  <br />
-
   <% if(currUser && listing.owner._id.equals(currUser._id)) { %>
   <div class="btns">
     <a
@@ -38,6 +36,7 @@
   <% } %>
 
   <div class="col-8 offset-3 mb-3">
+    <hr />
     <% if(currUser) { %>
     <h4>Leave a Review</h4>
     <form
@@ -87,7 +86,7 @@
             class="mb-3"
             method="POST"
           >
-            <button class="btn btn-sm btn-dark">Delete</button>
+            <button class="btn btn-sm btn-dark mt-2">Delete</button>
           </form>
         </div>
       </div>
