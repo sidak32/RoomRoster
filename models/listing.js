@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Review = require("./review.js");
 const Schema = mongoose.Schema;
 
 const listingSchema = new Schema({
@@ -10,13 +11,8 @@ const listingSchema = new Schema({
   description: String,
 
   image: {
-    type: String,
-    default:
-      "https://media.istockphoto.com/id/104731717/photo/luxury-resort.jpg?s=612x612&w=0&k=20&c=cODMSPbYyrn1FHake1xYz9M8r15iOfGz9Aosy9Db7mI=",
-    set: (v) =>
-      v === ""
-        ? "https://media.istockphoto.com/id/104731717/photo/luxury-resort.jpg?s=612x612&w=0&k=20&c=cODMSPbYyrn1FHake1xYz9M8r15iOfGz9Aosy9Db7mI="
-        : v,
+    url: String,
+    filename: String,
   },
   price: Number,
   location: String,

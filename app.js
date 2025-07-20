@@ -1,3 +1,5 @@
+const dotenv = require("dotenv");
+dotenv.config();
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -15,7 +17,7 @@ const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/roomroster";
+const dbUrl = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/roomroster";
 
 main()
   .then(() => {
@@ -26,7 +28,7 @@ main()
   });
 
 async function main() {
-  await mongoose.connect(MONGO_URL);
+  await mongoose.connect(dbUrl);
 }
 
 app.set("view engine", "ejs");
@@ -36,8 +38,9 @@ app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
+
 const sessionOptions = {
-  secret: "supersecretkey",
+  secret: process.env.SECRET,
   resave: false,
   saveUninitialized: true,
   cookie: {
@@ -47,16 +50,11 @@ const sessionOptions = {
   },
 };
 
-app.get("/", (req, res) => {
-  res.send("I am root");
-});
-
 app.use(session(sessionOptions));
 app.use(flash());
 
 app.use(passport.initialize());
 app.use(passport.session());
-
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
@@ -72,11 +70,12 @@ app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
 
+
 app.use((err, req, res, next) => {
   let { statusCode = 500, message = "something went wrong" } = err;
   res.status(statusCode).render("error.ejs", { message });
 });
 
-app.listen(8080, () => {
-  console.log("server is listening to port 8080");
+app.listen(8000, () => {
+  console.log("server is listening to port 8000");
 });

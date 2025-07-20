@@ -118,3 +118,44 @@ body {
   padding-left: 0;
   padding-right: 0;
 }
+
+/*                     /
+
+* add new page form*/
+#all {
+  background-color: wheat;
+  opacity: 2;
+  margin: auto;
+  padding: 15px;
+  border-radius: 15px;
+}
+
+.newform {
+  padding: 20px;
+}
+
+/* Edit page form */
+#all2 {
+  background-color: wheat;
+  opacity: 2;
+  margin: auto;
+  padding: 15px;
+  border-radius: 15px;
+}
+
+.editform {
+  padding: 20px;
+}
+
+/* show page */
+.btns {
+  display: flex;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.edit-btn {
+  background-color: #fe424d !important;
+  border: none !important;
+}
+

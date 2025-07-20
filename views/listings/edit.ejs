@@ -1,7 +1,7 @@
 <% layout("/layouts/boilerplate")%>
 
-<div class="row mt-3">
-  <div class="col-8 offset-2">
+<div class="row mt-3 editform">
+  <div class="col-8 offset-2" id="all2">
     <br />
     <h3>Edit your Listing</h3>
     <br />
@@ -11,9 +11,10 @@
       action="/listings/<%= listing._id%>?_method=PUT"
       novalidate
       class="needs-validation"
+      enctype="multipart/form-data"
     >
       <div class="mb-3">
-        <label for="title" class="form-label">Title</label>
+        <label for="title" class="form-label"><b>Title</b> </label>
         <input
           name="listing[title]"
           value="<%=listing.title%>"
@@ -25,7 +26,7 @@
       </div>
 
       <div class="mb-3">
-        <label for="description" class="form-label">Description</label>
+        <label for="description" class="form-label"><b>Description</b></label>
         <textarea name="listing[description]" class="form-control" required>
 <%=listing.description%></textarea
         >
@@ -33,20 +34,18 @@
       </div>
 
       <div class="mb-3">
-        <label for="image" class="form-label">Image</label>
-        <input
-          name="listing[image]"
-          value="<%=listing.image %>"
-          type="text"
-          class="form-control"
-          required
-        />
-        <div class="invalid-feedback">Enter valid image url</div>
+        <P>Original Image Preview</P>
+        <img src="<%= originalImageUrl %>" />
+      </div>
+
+      <div class="mb-3">
+        <label for="image" class="form-label"> <b>Upload New Image </b> </label>
+        <input name="listing[image]" type="file" class="form-control" />
       </div>
 
       <div class="row">
         <div class="mb-3 col-md-4">
-          <label for="price" class="form-label">Price</label>
+          <label for="price" class="form-label"><b>Price</b></label>
           <input
             name="listing[price]"
             value="<%=listing.price%>"
@@ -58,7 +57,7 @@
         </div>
 
         <div class="mb-3 col-md-8">
-          <label for="country" class="form-label">Country</label>
+          <label for="country" class="form-label"><b>Country</b></label>
           <input
             name="listing[country]"
             value="<%=listing.country%>"
@@ -71,7 +70,7 @@
       </div>
 
       <div class="mb-3">
-        <label for="location" class="form-label">Location</label>
+        <label for="location" class="form-label"><b>Location</b></label>
         <input
           name="listing[location]"
           value="<%=listing.location%>"
